@@ -418,10 +418,6 @@
 
     <div class="page-header">
       <h1 class="page-title">Publishing</h1>
-      <div class="hide-cards-toggle">
-        Hide cards
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
     </div>
 
     <!-- Summary Stat Cards -->
@@ -536,6 +532,10 @@
           <div class="today-stat-block">
             <div class="today-stat-label"><span class="today-stat-dot building"></span>Building</div>
             <div class="today-stat-number building">0 <span class="today-stat-pct">&mdash;</span></div>
+          </div>
+          <div class="today-stat-block">
+            <div class="today-stat-label"><span class="today-stat-dot" style="background:#7C3AED;"></span>Queued</div>
+            <div class="today-stat-number" style="color:#7C3AED;">0 <span class="today-stat-pct">&mdash;</span></div>
           </div>
           <div class="today-stat-block">
             <div class="today-stat-label"><span class="today-stat-dot cancelled"></span>Cancelled</div>
@@ -676,11 +676,6 @@
       </div>
 
       <div class="cube-legend">
-        <div class="cube-legend-item"><span class="cube-legend-dot finished"></span>Finished (138)</div>
-        <div class="cube-legend-item"><span class="cube-legend-dot failed"></span>Failed (21)</div>
-        <div class="cube-legend-item"><span class="cube-legend-dot building"></span>Building (0)</div>
-        <div class="cube-legend-item"><span class="cube-legend-dot queued"></span>Queued (0)</div>
-        <div class="cube-legend-item"><span class="cube-legend-dot cancelled"></span>Cancelled (0)</div>
         <div class="cube-legend-item"><span class="cube-legend-dot empty"></span>Not yet published</div>
         <div style="margin-left:auto;font-size:12px;color:#9CA3AF;">Each cube = 1 publish &middot; Hover for details &middot; Oldest &rarr; newest</div>
       </div>
