@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Publishing Dashboard - Genesis</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -24,324 +28,745 @@
       justify-content: space-between;
       padding: 0 16px;
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
     }
-    .header-left { display: flex; align-items: center; gap: 16px; }
-    .logo { display: flex; align-items: center; gap: 8px; }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .logo-icon {
-      width: 28px; height: 28px;
+      width: 28px;
+      height: 28px;
       background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
       border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-weight: 600; font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
     }
-    .logo-text { color: white; font-size: 18px; font-weight: 500; }
+
+    .logo-text {
+      color: white;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
     .btn-create {
-      background: #EA580C; color: white; border: none;
-      padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500;
-      cursor: pointer; display: flex; align-items: center; gap: 6px;
+      background: #EA580C;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .btn-create:hover { background: #DC5209; }
+
+    .btn-create:hover {
+      background: #DC5209;
+    }
+
     .btn-recent {
-      background: transparent; color: #9CA3AF; border: none;
-      padding: 8px 12px; border-radius: 6px; font-size: 14px;
-      cursor: pointer; display: flex; align-items: center; gap: 6px;
+      background: transparent;
+      color: #9CA3AF;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .btn-recent:hover { color: white; }
-    .header-right { display: flex; align-items: center; gap: 12px; }
+
+    .btn-recent:hover {
+      color: white;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .header-icon {
-      width: 36px; height: 36px; border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
-      color: #9CA3AF; cursor: pointer; position: relative;
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9CA3AF;
+      cursor: pointer;
+      position: relative;
     }
-    .header-icon:hover { background: rgba(255,255,255,0.1); color: white; }
+
+    .header-icon:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
     .notification-badge {
-      position: absolute; top: 4px; right: 4px;
-      width: 16px; height: 16px; background: #EF4444;
-      border-radius: 50%; font-size: 10px; color: white;
-      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 16px;
+      height: 16px;
+      background: #EF4444;
+      border-radius: 50%;
+      font-size: 10px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .user-profile {
-      display: flex; align-items: center; gap: 8px;
-      color: #9CA3AF; font-size: 14px; cursor: pointer;
-      padding: 4px 8px; border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #9CA3AF;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
     }
-    .user-profile:hover { color: white; }
+
+    .user-profile:hover {
+      color: white;
+    }
 
     /* ===== SIDEBAR ===== */
     .sidebar {
-      width: 64px; background: #324152;
-      position: fixed; top: 56px; left: 0; bottom: 0;
-      display: flex; flex-direction: column; padding: 8px 0; z-index: 90;
+      width: 64px;
+      background: #324152;
+      position: fixed;
+      top: 56px;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 8px 0;
+      z-index: 90;
     }
+
     .nav-item {
-      display: flex; flex-direction: column; align-items: center;
-      padding: 12px 8px; color: #9CA3AF; text-decoration: none;
-      font-size: 11px; cursor: pointer; border-left: 3px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 8px;
+      color: #9CA3AF;
+      text-decoration: none;
+      font-size: 11px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
     }
-    .nav-item:hover { color: white; background: rgba(255,255,255,0.05); }
-    .nav-item.active { color: white; background: rgba(255,255,255,0.1); border-left-color: #EA580C; }
-    .nav-item svg { width: 22px; height: 22px; margin-bottom: 4px; }
+
+    .nav-item:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .nav-item.active {
+      color: white;
+      background: rgba(255,255,255,0.1);
+      border-left-color: #EA580C;
+    }
+
+    .nav-item svg {
+      width: 22px;
+      height: 22px;
+      margin-bottom: 4px;
+    }
 
     /* ===== MAIN CONTENT ===== */
     .main-content {
-      margin-left: 64px; margin-top: 56px;
-      padding: 24px 32px; min-height: calc(100vh - 56px);
+      margin-left: 64px;
+      margin-top: 56px;
+      padding: 24px 32px;
+      min-height: calc(100vh - 56px);
     }
+
     .page-header {
-      margin-bottom: 20px; display: flex;
-      align-items: center; justify-content: space-between;
-    }
-    .page-title { font-size: 18px; font-weight: 500; color: #1F2937; }
-    .hide-cards-toggle {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 12px; color: #6B7280;
-      text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer;
+      margin-bottom: 24px;
     }
 
-    /* ===== ALERT BANNER ===== */
-    .alert-banner {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 14px 20px;
-      background: #FEF2F2; border: 1px solid #FECACA;
-      border-left: 4px solid #DC2626;
-      border-radius: 8px; margin-bottom: 16px;
+    .page-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #1F2937;
     }
-    .alert-banner-icon { flex-shrink: 0; width: 20px; height: 20px; color: #DC2626; margin-top: 1px; }
-    .alert-banner-body { flex: 1; }
-    .alert-banner-title { font-size: 14px; font-weight: 600; color: #991B1B; margin-bottom: 2px; }
-    .alert-banner-desc { font-size: 13px; color: #B91C1C; }
-    .alert-banner-dismiss { flex-shrink: 0; background: none; border: none; color: #9CA3AF; cursor: pointer; font-size: 20px; line-height: 1; padding: 0; margin-top: -2px; }
-    .alert-banner-dismiss:hover { color: #6B7280; }
 
-    /* ===== CARDS ===== */
-    .card { background: white; border-radius: 8px; border: 1px solid #E5E7EB; margin-bottom: 16px; }
-    .card-header {
-      padding: 16px 20px 12px; font-size: 12px; font-weight: 500;
-      color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
-    .card-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
-
-    /* ===== SUMMARY STATS ===== */
-    .stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 16px; }
-    .stat-card { background: white; border-radius: 8px; border: 1px solid #E5E7EB; padding: 16px 20px; }
-    .stat-card-alarm {
-      background: #FEF2F2; border-radius: 8px;
-      border: 1px solid #FECACA; border-top: 3px solid #DC2626;
-      padding: 16px 20px;
-    }
-    .stat-label { font-size: 12px; color: #6B7280; margin-bottom: 4px; }
-    .stat-value { font-size: 28px; font-weight: 600; line-height: 1.1; }
-    .stat-value.blue { color: #2563EB; }
-    .stat-value.green { color: #059669; }
-    .stat-value.red { color: #DC2626; }
-    .stat-value.default { color: #1F2937; }
-    .stat-sub { font-size: 11px; color: #9CA3AF; margin-top: 4px; }
-    .stat-mini-bar { height: 4px; border-radius: 2px; background: #E5E7EB; margin-top: 8px; overflow: hidden; }
-    .stat-mini-bar-fill { height: 100%; border-radius: 2px; background: #059669; }
-
-    /* ===== TABLE STYLES ===== */
-    .data-table { width: 100%; border-collapse: collapse; }
-    .data-table th {
-      text-align: left; padding: 12px 20px;
-      font-size: 12px; font-weight: 500; color: #6B7280;
-      border-bottom: 1px solid #E5E7EB;
-    }
-    .data-table th:last-child { text-align: right; }
-    .data-table td { padding: 12px 20px; font-size: 14px; border-bottom: 1px solid #F3F4F6; }
-    .data-table td:last-child { text-align: right; }
-    .data-table tr:last-child td { border-bottom: none; }
-
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; text-transform: uppercase; }
-    .badge.live { background: #D1FAE5; color: #059669; }
-    .badge.preview { background: #DBEAFE; color: #2563EB; }
-    .link { color: #2563EB; text-decoration: none; }
-    .link:hover { text-decoration: underline; }
-
-    .empty-state { text-align: center; color: #9CA3AF; padding: 32px 20px !important; font-size: 13px; }
-
-    /* ===== STATUS BADGES ===== */
-    .status-badge {
-      display: inline-block; padding: 4px 10px; border-radius: 4px;
-      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
-    }
-    .status-badge.finished { background: #D1FAE5; color: #059669; }
-    .status-badge.failed   { background: #FEE2E2; color: #DC2626; }
-    .status-badge.building { background: #FEF3C7; color: #D97706; }
-    .status-badge.queued   { background: #EDE9FE; color: #7C3AED; }
-    .status-badge.cancelled { background: #E5E7EB; color: #6B7280; }
-
-    /* ===== HEALTH PILL ===== */
-    .health-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 10px; border-radius: 20px;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase;
-    }
-    .health-pill.healthy  { background: #D1FAE5; color: #059669; }
-    .health-pill.warning  { background: #FEF3C7; color: #D97706; }
-    .health-pill.critical { background: #FEE2E2; color: #DC2626; }
-
-    /* ===== TODAY'S PUBLISHES SUMMARY ===== */
-    .today-summary { padding: 12px 20px 16px; border-bottom: 1px solid #E5E7EB; }
-    .today-status-bar {
-      height: 10px; border-radius: 5px; background: #E5E7EB;
-      overflow: hidden; display: flex; margin-bottom: 14px;
-    }
-    .today-status-bar-segment { height: 100%; }
-    .today-status-bar-segment.finished { background: #059669; }
-    .today-status-bar-segment.failed   { background: #DC2626; }
-    .today-status-bar-segment.building { background: #D97706; }
-    .today-status-bar-segment.queued   { background: #7C3AED; }
-
-    .today-stat-blocks { display: flex; gap: 0; }
-    .today-stat-block { flex: 1; padding: 0 16px 0 0; border-right: 1px solid #F3F4F6; }
-    .today-stat-block:last-child { border-right: none; padding-right: 0; }
-    .today-stat-block:first-child { padding-left: 0; }
-    .today-stat-label { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #6B7280; margin-bottom: 4px; }
-    .today-stat-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
-    .today-stat-dot.finished  { background: #059669; }
-    .today-stat-dot.failed    { background: #DC2626; }
-    .today-stat-dot.building  { background: #D97706; }
-    .today-stat-dot.cancelled { background: #93C5FD; }
-    .today-stat-number { font-size: 22px; font-weight: 700; line-height: 1.1; display: flex; align-items: baseline; gap: 4px; }
-    .today-stat-number.finished  { color: #059669; }
-    .today-stat-number.failed    { color: #DC2626; }
-    .today-stat-number.building  { color: #D97706; }
-    .today-stat-number.cancelled { color: #9CA3AF; }
-    .today-stat-pct { font-size: 12px; color: #9CA3AF; font-weight: 400; }
-
-    /* ===== PUBLISH CUBE GRID ===== */
-    .cube-grid-wrap { padding: 16px 20px 4px; }
-    .cube-grid-time-labels {
-      display: flex; justify-content: space-between;
-      padding: 0 0 6px 0; font-size: 11px; color: #9CA3AF;
-    }
-    .cube-grid {
+    /* ===== TABBED STAT CARDS ===== */
+    .stats-tabs {
       display: grid;
-      grid-template-columns: repeat(40, 1fr);
-      gap: 3px; margin-bottom: 8px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 0;
     }
-    .cube {
-      aspect-ratio: 1; border-radius: 3px; cursor: pointer;
-      transition: opacity 0.1s ease, transform 0.1s ease;
+
+    .stat-tab {
+      background: white;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
       position: relative;
     }
-    .cube:hover { opacity: 0.8; transform: scale(1.2); z-index: 2; }
-    .cube.finished  { background: #059669; }
-    .cube.failed    { background: #DC2626; }
-    .cube.building  { background: #D97706; }
-    .cube.queued    { background: #7C3AED; }
-    .cube.cancelled { background: #9CA3AF; }
-    .cube.empty     { background: #E5E7EB; cursor: default; }
 
-    .cube-legend {
-      display: flex; align-items: center; gap: 16px;
-      padding: 8px 20px 16px; font-size: 12px; color: #6B7280;
-      border-top: 1px solid #F3F4F6; margin-top: 4px; flex-wrap: wrap;
+    .stat-tab:hover {
+      border-color: #E5E7EB;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    .cube-legend-item { display: flex; align-items: center; gap: 5px; }
-    .cube-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-    .cube-legend-dot.finished  { background: #059669; }
-    .cube-legend-dot.failed    { background: #DC2626; }
-    .cube-legend-dot.building  { background: #D97706; }
-    .cube-legend-dot.queued    { background: #7C3AED; }
-    .cube-legend-dot.cancelled { background: #9CA3AF; }
-    .cube-legend-dot.empty     { background: #E5E7EB; }
 
-    /* Tooltip */
-    .cube[data-tip]:hover::after {
-      content: attr(data-tip);
-      position: absolute; bottom: calc(100% + 6px); left: 50%;
+    .stat-tab.active {
+      border-color: #3B82F6;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+    }
+
+    .stat-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
       transform: translateX(-50%);
-      background: #1F2937; color: white; font-size: 11px;
-      white-space: nowrap; padding: 4px 8px; border-radius: 4px;
-      pointer-events: none; z-index: 10;
-    }
-    .cube[data-tip]:hover::before {
-      content: ''; position: absolute; bottom: calc(100% + 2px); left: 50%;
-      transform: translateX(-50%);
-      border: 4px solid transparent; border-top-color: #1F2937;
-      pointer-events: none; z-index: 10;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #3B82F6;
     }
 
-    /* ===== ERROR TYPE MINI BARS ===== */
-    .error-bar-cell { width: 140px; vertical-align: middle; padding-right: 8px !important; }
-    .error-bar-wrap { display: flex; align-items: center; gap: 8px; }
-    .error-pct-label { font-size: 12px; color: #6B7280; min-width: 46px; text-align: right; flex-shrink: 0; }
-    .error-bar { flex: 1; height: 5px; background: #FEE2E2; border-radius: 3px; overflow: hidden; min-width: 50px; }
-    .error-bar-fill { height: 100%; background: #DC2626; border-radius: 3px; }
-    .error-message { font-size: 13px; line-height: 1.5; }
-    .error-type { color: #DC2626; font-weight: 500; }
-    .error-link { color: #2563EB; }
-
-    /* ===== ICON BUTTONS ===== */
-    .btn-icon {
-      width: 28px; height: 28px; border-radius: 5px; border: none;
-      background: #E0F2FE; color: #0284C7; cursor: pointer;
-      display: inline-flex; align-items: center; justify-content: center;
-      transition: background 0.15s ease;
+    .stat-tab .stat-label {
+      font-size: 13px;
+      color: #6B7280;
+      margin-bottom: 4px;
     }
-    .btn-icon:hover { background: #BAE6FD; }
 
-    /* ===== CLICKABLE ROWS ===== */
-    .clickable-row { cursor: pointer; transition: background 0.15s ease; }
-    .clickable-row:hover { background: #F9FAFB; }
-    .row-failed { background: #FFFBFB; }
-    .row-failed td:first-child { box-shadow: inset 3px 0 0 #DC2626; }
-    .row-failed:hover { background: #FEF2F2 !important; }
+    .stat-tab .stat-value {
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .stat-tab .stat-sublabel {
+      font-size: 11px;
+      color: #9CA3AF;
+      margin-top: 2px;
+    }
+
+    .stat-tab .stat-value.blue { color: #2563EB; }
+    .stat-tab .stat-value.green { color: #059669; }
+    .stat-tab .stat-value.red { color: #DC2626; }
+    .stat-tab .stat-value.default { color: #1F2937; }
+
+    /* Success rate card (non-clickable) */
+    .stat-tab.info-only {
+      cursor: default;
+      background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+      border: none;
+    }
+
+    .stat-tab.info-only:hover {
+      box-shadow: none;
+      border: none;
+    }
+
+    .stat-tab.info-only .stat-label {
+      color: #065F46;
+    }
+
+    .stat-tab.info-only .stat-value {
+      color: #059669;
+    }
+
+    .stat-tab.info-only .stat-sublabel {
+      color: #047857;
+    }
+
+    /* ===== TAB PANELS ===== */
+    .tab-panels {
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #E5E7EB;
+      margin-bottom: 16px;
+    }
+
+    .card-header {
+      padding: 16px 20px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6B7280;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-header-right {
+      font-size: 13px;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    /* ===== DATA TABLE ===== */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6B7280;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .data-table th:last-child {
+      text-align: right;
+    }
+
+    .data-table td {
+      padding: 12px 20px;
+      font-size: 14px;
+      border-bottom: 1px solid #F3F4F6;
+    }
+
+    .data-table td:last-child {
+      text-align: right;
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .badge.live {
+      background: #D1FAE5;
+      color: #059669;
+    }
+
+    .badge.preview {
+      background: #DBEAFE;
+      color: #2563EB;
+    }
+
+    .link {
+      color: #2563EB;
+      text-decoration: none;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #9CA3AF;
+      padding: 32px 20px !important;
+      font-size: 13px;
+    }
+
+    /* ===== TODAY'S PUBLISHES PANEL ===== */
+    .todays-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px 20px;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .todays-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .health-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .health-badge.healthy {
+      background: #D1FAE5;
+      color: #059669;
+    }
+
+    .health-badge.warning {
+      background: #FEF3C7;
+      color: #D97706;
+    }
+
+    .health-badge.critical {
+      background: #FEE2E2;
+      color: #DC2626;
+    }
+
+    .todays-stats {
+      display: flex;
+      gap: 24px;
+    }
+
+    .todays-stat {
+      text-align: right;
+    }
+
+    .todays-stat-label {
+      font-size: 11px;
+      color: #9CA3AF;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .todays-stat-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .todays-stat-value {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .todays-stat-pct {
+      font-size: 13px;
+      color: #6B7280;
+    }
+
+    /* ===== HEATMAP ===== */
+    .heatmap-container {
+      padding: 16px 20px;
+    }
+
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(24, 1fr);
+      gap: 3px;
+      margin-bottom: 8px;
+    }
+
+    .heatmap-cell {
+      aspect-ratio: 1;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      position: relative;
+    }
+
+    .heatmap-cell:hover {
+      transform: scale(1.3);
+      z-index: 10;
+    }
+
+    .heatmap-cell.success { background: #059669; }
+    .heatmap-cell.failed { background: #DC2626; }
+    .heatmap-cell.building { background: #D97706; }
+    .heatmap-cell.queued { background: #7C3AED; }
+    .heatmap-cell.cancelled { background: #93C5FD; }
+    .heatmap-cell.empty { background: #E5E7EB; }
+
+    .heatmap-timeline {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #9CA3AF;
+      padding-top: 4px;
+    }
+
+    .heatmap-legend {
+      display: flex;
+      gap: 16px;
+      padding: 12px 20px;
+      font-size: 12px;
+      color: #6B7280;
+      border-top: 1px solid #F3F4F6;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    /* ===== ERROR SECTION ===== */
+    .error-table td:first-child {
+      width: 70px;
+      color: #6B7280;
+    }
+
+    .error-message {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .error-type {
+      color: #DC2626;
+      font-weight: 500;
+    }
+
+    .error-link {
+      color: #2563EB;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-view-all {
+      display: block;
+      width: calc(100% - 40px);
+      margin: 0 20px 16px;
+      padding: 10px;
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #6B7280;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-view-all:hover {
+      background: #F3F4F6;
+      color: #374151;
+    }
 
     /* ===== 30 DAY TABLE ===== */
-    .full-table-card { background: white; border-radius: 8px; border: 1px solid #E5E7EB; margin-bottom: 16px; overflow: hidden; }
-    .table-toolbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-bottom: 1px solid #E5E7EB; }
-    .table-toolbar-left { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #6B7280; }
-    .table-toolbar-left select { padding: 6px 10px; border: 1px solid #E5E7EB; border-radius: 4px; font-size: 13px; color: #374151; background: white; }
-    .search-input { padding: 7px 12px; border: 1px solid #E5E7EB; border-radius: 6px; font-size: 13px; width: 200px; }
-    .search-input:focus { outline: none; border-color: #3B82F6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+    .full-table-card {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #E5E7EB;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
 
-    .full-table-scroll { max-height: 520px; overflow-y: auto; }
-    .full-table-scroll::-webkit-scrollbar { width: 6px; }
-    .full-table-scroll::-webkit-scrollbar-track { background: #F9FAFB; }
-    .full-table-scroll::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
-    .full-table-scroll::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+    .table-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid #E5E7EB;
+    }
 
-    .full-data-table { width: 100%; border-collapse: collapse; }
+    .table-toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #6B7280;
+    }
+
+    .table-toolbar-left select {
+      padding: 6px 10px;
+      border: 1px solid #E5E7EB;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #374151;
+      background: white;
+    }
+
+    .search-input {
+      padding: 8px 12px;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      font-size: 13px;
+      width: 200px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .full-data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
     .full-data-table th {
-      text-align: left; padding: 10px 16px; font-size: 12px; font-weight: 500;
-      color: #6B7280; background: #F9FAFB; border-bottom: 1px solid #E5E7EB;
-      position: sticky; top: 0; z-index: 1;
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #6B7280;
+      background: #F9FAFB;
+      border-bottom: 1px solid #E5E7EB;
     }
-    .full-data-table td { padding: 10px 16px; font-size: 13px; border-bottom: 1px solid #F3F4F6; vertical-align: middle; }
-    .full-data-table tr:hover { background: #F9FAFB; }
-    .full-data-table .row-failed td:first-child { box-shadow: inset 3px 0 0 #DC2626; }
-    .full-data-table .row-failed { background: #FFFBFB; }
-    .full-data-table .row-failed:hover { background: #FEF2F2 !important; }
-    .full-data-table .text-muted { color: #9CA3AF; font-size: 12px; }
 
-    .pagination { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-top: 1px solid #E5E7EB; font-size: 13px; color: #6B7280; }
-    .pagination-buttons { display: flex; gap: 4px; }
-    .pagination-btn { padding: 5px 10px; border: 1px solid #E5E7EB; background: white; border-radius: 4px; font-size: 13px; color: #374151; cursor: pointer; }
-    .pagination-btn:hover { background: #F3F4F6; }
-    .pagination-btn.active { background: #374151; color: white; border-color: #374151; }
-    .pagination-btn:disabled { color: #D1D5DB; cursor: not-allowed; }
-
-    /* ===== VIEW ALL BUTTON ===== */
-    .btn-view-all {
-      display: block; width: calc(100% - 40px); margin: 0 20px 16px;
-      padding: 10px; background: #F9FAFB; border: 1px solid #E5E7EB;
-      border-radius: 6px; font-size: 13px; color: #6B7280; cursor: pointer; text-align: center;
+    .full-data-table td {
+      padding: 12px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid #F3F4F6;
+      vertical-align: middle;
     }
-    .btn-view-all:hover { background: #F3F4F6; color: #374151; }
+
+    .full-data-table tr:hover {
+      background: #F9FAFB;
+      cursor: pointer;
+    }
+
+    .full-data-table .text-muted {
+      color: #9CA3AF;
+      font-size: 12px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-badge.finished { background: #D1FAE5; color: #059669; }
+    .status-badge.failed { background: #FEE2E2; color: #DC2626; }
+    .status-badge.building { background: #FEF3C7; color: #D97706; }
+
+    .btn-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: none;
+      background: #4DD0E1;
+      color: white;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 4px;
+    }
+
+    .btn-icon:hover {
+      background: #26C6DA;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      border-top: 1px solid #E5E7EB;
+      font-size: 13px;
+      color: #6B7280;
+    }
+
+    .pagination-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
+    .pagination-btn {
+      padding: 6px 12px;
+      border: 1px solid #E5E7EB;
+      background: white;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #374151;
+      cursor: pointer;
+    }
+
+    .pagination-btn:hover {
+      background: #F3F4F6;
+    }
+
+    .pagination-btn.active {
+      background: #374151;
+      color: white;
+      border-color: #374151;
+    }
+
+    .pagination-btn:disabled {
+      color: #D1D5DB;
+      cursor: not-allowed;
+    }
 
     /* ===== FOOTER ===== */
-    .footer { text-align: center; padding: 32px 0; font-size: 13px; color: #9CA3AF; }
-    .footer a { color: #EA580C; text-decoration: none; }
-    .footer a:hover { text-decoration: underline; }
+    .footer {
+      text-align: center;
+      padding: 32px 0;
+      font-size: 13px;
+      color: #9CA3AF;
+    }
+
+    .footer a {
+      color: #EA580C;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-
   <!-- Top Header -->
   <header class="top-header">
     <div class="header-left">
@@ -388,11 +813,11 @@
       Sites
     </a>
     <a class="nav-item" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
       Media
     </a>
     <a class="nav-item" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
       Lookups
     </a>
     <a class="nav-item active" href="#">
@@ -400,11 +825,11 @@
       Publishing
     </a>
     <a class="nav-item" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.6 9a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
       Settings
     </a>
     <a class="nav-item" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
       System
     </a>
     <a class="nav-item" href="#">
@@ -415,402 +840,572 @@
 
   <!-- Main Content -->
   <main class="main-content">
-
     <div class="page-header">
       <h1 class="page-title">Publishing</h1>
     </div>
 
-    <!-- Summary Stat Cards -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-label">Active publishes</div>
-        <div class="stat-value blue">4</div>
-        <div class="stat-sub">Currently running</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Queued</div>
-        <div class="stat-value default">0</div>
-        <div class="stat-sub">Waiting to run</div>
-      </div>
-      <div class="stat-card-alarm">
-        <div class="stat-label" style="color:#B91C1C;">Persistent fails</div>
-        <div class="stat-value red">2</div>
-        <div class="stat-sub" style="color:#DC2626;">Require investigation</div>
-      </div>
-      <div class="stat-card">
+    <!-- Tabbed Stat Cards -->
+    <div class="stats-tabs">
+      <div class="stat-tab active" data-tab="today" onclick="switchTab('today')">
         <div class="stat-label">Today's publishes</div>
         <div class="stat-value green">159</div>
-        <div class="stat-sub">Since midnight</div>
+        <div class="stat-sublabel">Since midnight</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-tab" data-tab="active" onclick="switchTab('active')">
+        <div class="stat-label">Active publishes</div>
+        <div class="stat-value blue">4</div>
+        <div class="stat-sublabel">Currently running</div>
+      </div>
+      <div class="stat-tab" data-tab="queued" onclick="switchTab('queued')">
+        <div class="stat-label">Queued</div>
+        <div class="stat-value default">0</div>
+        <div class="stat-sublabel">Waiting to run</div>
+      </div>
+      <div class="stat-tab" data-tab="fails" onclick="switchTab('fails')">
+        <div class="stat-label">Persistent fails</div>
+        <div class="stat-value red">2</div>
+        <div class="stat-sublabel">Require investigation</div>
+      </div>
+      <div class="stat-tab info-only">
         <div class="stat-label">Success rate today</div>
-        <div class="stat-value green">87.1%</div>
-        <div class="stat-mini-bar"><div class="stat-mini-bar-fill" style="width:87.1%;"></div></div>
-        <div class="stat-sub">138 finished &middot; 21 failed</div>
+        <div class="stat-value">87.1%</div>
+        <div class="stat-sublabel">138 finished · 21 failed</div>
       </div>
     </div>
 
-    <!-- Active / Queued / Persistent Fails -->
-    <div class="card-grid-3">
-
-      <div class="card">
-        <div class="card-header">Active Publishes</div>
-        <table class="data-table">
-          <thead><tr><th>Mode</th><th>Site/Group</th><th># Pages</th></tr></thead>
-          <tbody>
-            <tr><td><span class="badge live">LIVE</span></td><td><a href="#" class="link">WhichBingo.co.uk</a></td><td>1,208</td></tr>
-            <tr><td><span class="badge live">LIVE</span></td><td><a href="#" class="link">Freebets.com</a></td><td>298</td></tr>
-            <tr><td><span class="badge live">LIVE</span></td><td><a href="#" class="link">Casinos.com - Intl (GX)</a></td><td>1</td></tr>
-            <tr><td><span class="badge live">LIVE</span></td><td><a href="#" class="link">Bookies.com AdTech</a></td><td>11,040</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card">
-        <div class="card-header">Queued Publishes</div>
-        <table class="data-table">
-          <thead><tr><th>Mode</th><th>Site/Group</th><th># Pages</th></tr></thead>
-          <tbody>
-            <tr><td colspan="3" class="empty-state">No queued publishes at the moment.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card" style="border-top:2px solid #DC2626;">
-        <div class="card-header" style="display:flex;align-items:center;gap:8px;">
-          <span style="width:8px;height:8px;background:#DC2626;border-radius:50%;display:inline-block;flex-shrink:0;"></span>
-          Persistent Fails
-        </div>
-        <table class="data-table">
-          <thead><tr><th>Mode</th><th>Site/Group</th><th># Attempts</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="badge live">LIVE</span></td>
-              <td><a href="#" class="link">Freebets.com</a></td>
-              <td><span style="display:inline-flex;align-items:center;gap:4px;color:#DC2626;font-weight:600;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>4</span></td>
-            </tr>
-            <tr>
-              <td><span class="badge live">LIVE</span></td>
-              <td><a href="#" class="link">BetSyndicate.ai</a></td>
-              <td><span style="display:inline-flex;align-items:center;gap:4px;color:#DC2626;font-weight:600;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>2</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-
-    <!-- Today's Publishes -->
-    <div class="card">
-
-      <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;">
-        <span>Today's Publishes</span>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span class="health-pill healthy">
-            <svg width="7" height="7" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
-            Healthy &middot; 87.1%
-          </span>
-          <span style="font-size:13px;font-weight:400;text-transform:none;letter-spacing:0;color:#6B7280;">159 publishes today</span>
-        </div>
-      </div>
-
-      <!-- Status bar + stat blocks -->
-      <div class="today-summary">
-        <div class="today-status-bar">
-          <div class="today-status-bar-segment finished" style="width:87.1%;"></div>
-          <div class="today-status-bar-segment failed"   style="width:12.9%;"></div>
-        </div>
-        <div class="today-stat-blocks">
-          <div class="today-stat-block">
-            <div class="today-stat-label"><span class="today-stat-dot finished"></span>Finished</div>
-            <div class="today-stat-number finished">138 <span class="today-stat-pct">87.1%</span></div>
+    <!-- Tab Panels -->
+    <div class="tab-panels">
+      <!-- Today's Publishes Panel -->
+      <div class="tab-panel active" id="panel-today">
+        <div class="card">
+          <div class="todays-header">
+            <div class="todays-title">
+              <span style="font-size: 12px; font-weight: 500; color: #6B7280; text-transform: uppercase; letter-spacing: 0.5px;">Today's Publishes</span>
+              <span class="health-badge healthy">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg>
+                Healthy · 87.1%
+              </span>
+            </div>
+            <div class="todays-stats">
+              <div class="todays-stat">
+                <div class="todays-stat-label">Finished</div>
+                <div class="todays-stat-row">
+                  <span class="todays-stat-value" style="color: #059669;">138</span>
+                  <span class="todays-stat-pct">87.1%</span>
+                </div>
+              </div>
+              <div class="todays-stat">
+                <div class="todays-stat-label">Failed</div>
+                <div class="todays-stat-row">
+                  <span class="todays-stat-value" style="color: #DC2626;">21</span>
+                  <span class="todays-stat-pct">12.9%</span>
+                </div>
+              </div>
+              <div class="todays-stat">
+                <div class="todays-stat-label">Building</div>
+                <div class="todays-stat-row">
+                  <span class="todays-stat-value">0</span>
+                  <span class="todays-stat-pct">—</span>
+                </div>
+              </div>
+              <div class="todays-stat">
+                <div class="todays-stat-label">Queued</div>
+                <div class="todays-stat-row">
+                  <span class="todays-stat-value">0</span>
+                  <span class="todays-stat-pct">—</span>
+                </div>
+              </div>
+              <div class="todays-stat">
+                <div class="todays-stat-label">Cancelled</div>
+                <div class="todays-stat-row">
+                  <span class="todays-stat-value">0</span>
+                  <span class="todays-stat-pct">—</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="today-stat-block">
-            <div class="today-stat-label"><span class="today-stat-dot failed"></span>Failed</div>
-            <div class="today-stat-number failed">21 <span class="today-stat-pct">12.9%</span></div>
+          
+          <!-- Heatmap -->
+          <div class="heatmap-container">
+            <div class="heatmap-grid">
+              <!-- Row 1 - Morning publishes -->
+              <div class="heatmap-cell success" title="00:12 - Gambling.com CA - FINISHED"></div>
+              <div class="heatmap-cell success" title="00:45 - Freebets.com - FINISHED"></div>
+              <div class="heatmap-cell empty"></div>
+              <div class="heatmap-cell success" title="01:23 - Casinos.com UK - FINISHED"></div>
+              <div class="heatmap-cell success" title="01:45 - Bookies.com - FINISHED"></div>
+              <div class="heatmap-cell failed" title="02:10 - WhichBingo - FAILED"></div>
+              <div class="heatmap-cell success" title="02:30 - Gambling.com US - FINISHED"></div>
+              <div class="heatmap-cell success" title="03:15 - Gambling.com NO - FINISHED"></div>
+              <div class="heatmap-cell success" title="03:45 - Casinos.com IT - FINISHED"></div>
+              <div class="heatmap-cell success" title="04:20 - Freebets.com - FINISHED"></div>
+              <div class="heatmap-cell failed" title="04:55 - BetSyndicate.ai - FAILED"></div>
+              <div class="heatmap-cell success" title="05:30 - Gambling.com GB - FINISHED"></div>
+              <div class="heatmap-cell success" title="06:00 - Gambling.com AT - FINISHED"></div>
+              <div class="heatmap-cell success" title="06:45 - Casinos.com GX - FINISHED"></div>
+              <div class="heatmap-cell success" title="07:15 - Rotowire.com - FINISHED"></div>
+              <div class="heatmap-cell success" title="07:50 - Gambling.com CA - FINISHED"></div>
+              <div class="heatmap-cell failed" title="08:20 - Freebets.com - FAILED"></div>
+              <div class="heatmap-cell success" title="08:55 - WhichBingo - FINISHED"></div>
+              <div class="heatmap-cell success" title="09:30 - Gambling.com US - FINISHED"></div>
+              <div class="heatmap-cell success" title="10:00 - Casinos.com UK - FINISHED"></div>
+              <div class="heatmap-cell success" title="10:35 - Bookies.com - FINISHED"></div>
+              <div class="heatmap-cell failed" title="11:10 - Gambling.com NO - FAILED"></div>
+              <div class="heatmap-cell success" title="11:45 - Gambling.com IT - FINISHED"></div>
+              <div class="heatmap-cell success" title="12:20 - Freebets.com - FINISHED"></div>
+              <!-- Row 2 -->
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell failed"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell failed"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell failed"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell failed"></div>
+              <div class="heatmap-cell success"></div>
+              <!-- Row 3 -->
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell failed"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell failed"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell failed"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <!-- Row 4 -->
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell failed"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell failed"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell success"></div>
+              <div class="heatmap-cell empty"></div>
+              <div class="heatmap-cell empty"></div>
+              <div class="heatmap-cell empty"></div>
+              <div class="heatmap-cell empty"></div>
+              <div class="heatmap-cell empty"></div>
+              <div class="heatmap-cell empty"></div>
+              <div class="heatmap-cell empty"></div>
+              <div class="heatmap-cell empty"></div>
+              <div class="heatmap-cell empty"></div>
+            </div>
+            <div class="heatmap-timeline">
+              <span>00:00</span>
+              <span>03:00</span>
+              <span>06:00</span>
+              <span>09:00</span>
+              <span>12:00</span>
+              <span>15:00 →</span>
+            </div>
           </div>
-          <div class="today-stat-block">
-            <div class="today-stat-label"><span class="today-stat-dot building"></span>Building</div>
-            <div class="today-stat-number building">0 <span class="today-stat-pct">&mdash;</span></div>
-          </div>
-          <div class="today-stat-block">
-            <div class="today-stat-label"><span class="today-stat-dot" style="background:#7C3AED;"></span>Queued</div>
-            <div class="today-stat-number" style="color:#7C3AED;">0 <span class="today-stat-pct">&mdash;</span></div>
-          </div>
-          <div class="today-stat-block">
-            <div class="today-stat-label"><span class="today-stat-dot cancelled"></span>Cancelled</div>
-            <div class="today-stat-number cancelled">0 <span class="today-stat-pct">&mdash;</span></div>
+          <div class="heatmap-legend">
+            <div class="legend-item"><div class="legend-dot" style="background: #059669;"></div> Success</div>
+            <div class="legend-item"><div class="legend-dot" style="background: #DC2626;"></div> Failed</div>
+            <div class="legend-item"><div class="legend-dot" style="background: #D97706;"></div> Building</div>
+            <div class="legend-item"><div class="legend-dot" style="background: #7C3AED;"></div> Queued</div>
+            <div class="legend-item"><div class="legend-dot" style="background: #E5E7EB;"></div> Not yet published</div>
+            <span style="margin-left: auto; font-size: 11px; color: #9CA3AF;">Each cube = 1 publish · Hover for details · Oldest → newest</span>
           </div>
         </div>
       </div>
 
-      <!-- Cube grid — each cube = one publish, left to right oldest to newest -->
-      <div class="cube-grid-wrap">
-        <div class="cube-grid-time-labels">
-          <span>00:00</span><span>03:00</span><span>06:00</span><span>09:00</span><span>12:00</span><span>15:00 &rarr;</span>
-        </div>
-        <div class="cube-grid">
-          <div class="cube finished"  data-tip="00:04 &middot; Gambling.com AU &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="00:11 &middot; Casinos.com UK &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="00:19 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="00:32 &middot; Rotowire.com &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="00:41 &middot; Freebets.com &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="00:55 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="01:08 &middot; Casinos.com IT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="01:22 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="01:35 &middot; Gambling.com GB &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="01:49 &middot; BetSyndicate.ai &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="02:03 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="02:17 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="02:31 &middot; Casinos.com GX &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="02:44 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="02:58 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="03:12 &middot; Freebets.com &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="03:26 &middot; Rotowire.com &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="03:40 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="03:54 &middot; Casinos.com UK &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="04:08 &middot; Gambling.com GB &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="04:22 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="04:36 &middot; BetSyndicate.ai &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="04:50 &middot; Casinos.com IT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="05:04 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="05:18 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="05:32 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="05:46 &middot; Casinos.com GX &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="06:00 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="06:14 &middot; Rotowire.com &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="06:28 &middot; Freebets.com &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="06:42 &middot; Gambling.com GB &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="06:56 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="07:10 &middot; Casinos.com UK &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="07:24 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="07:38 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="07:52 &middot; Casinos.com IT &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="08:06 &middot; BetSyndicate.ai &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="08:20 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="08:34 &middot; Casinos.com GX &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="08:48 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:02 &middot; Rotowire.com &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:08 &middot; Gambling.com GB &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:14 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:20 &middot; Casinos.com UK &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:26 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:32 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:38 &middot; Casinos.com IT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:44 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:50 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="09:56 &middot; Casinos.com GX &middot; FINISHED"></div>
-          <!-- Failure cluster around 10:00 — visible batch of red -->
-          <div class="cube failed"    data-tip="10:02 &middot; Freebets.com &middot; FAILED"></div>
-          <div class="cube failed"    data-tip="10:05 &middot; Freebets.com &middot; FAILED"></div>
-          <div class="cube failed"    data-tip="10:08 &middot; Freebets.com &middot; FAILED"></div>
-          <div class="cube failed"    data-tip="10:11 &middot; BetSyndicate.ai &middot; FAILED"></div>
-          <div class="cube failed"    data-tip="10:14 &middot; BetSyndicate.ai &middot; FAILED"></div>
-          <div class="cube failed"    data-tip="10:17 &middot; Casinos.com IT &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="10:23 &middot; Gambling.com GB &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="10:29 &middot; Rotowire.com &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="10:35 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="10:41 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="10:47 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="10:53 &middot; Casinos.com UK &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="10:59 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="11:05 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="11:11 &middot; Casinos.com GX &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="11:17 &middot; Freebets.com &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="11:23 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="11:29 &middot; Rotowire.com &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="11:35 &middot; Gambling.com GB &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="11:41 &middot; Casinos.com IT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="11:47 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="11:53 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="11:59 &middot; Casinos.com UK &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="12:05 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="12:11 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="12:17 &middot; Casinos.com GX &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="12:23 &middot; Rotowire.com &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="12:29 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="12:35 &middot; Gambling.com GB &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="12:41 &middot; Casinos.com IT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="12:47 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="12:53 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="12:59 &middot; BetSyndicate.ai &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="13:05 &middot; Casinos.com UK &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="13:11 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="13:17 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="13:23 &middot; Casinos.com GX &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="13:29 &middot; Rotowire.com &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="13:35 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="13:41 &middot; Gambling.com GB &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="13:47 &middot; Casinos.com IT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="13:53 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="13:59 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:05 &middot; Casinos.com UK &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:11 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:17 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:21 &middot; Casinos.com UK &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:23 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:25 &middot; Rotowire.com &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="14:27 &middot; BetSyndicate.ai &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="14:29 &middot; WhichBingo.co.uk &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:31 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:32 &middot; Gambling.com US &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:34 &middot; Gambling.com AT &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:35 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:36 &middot; Gambling.com GB &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:42 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:44 &middot; Casinos.com GX &middot; FINISHED"></div>
-          <div class="cube failed"    data-tip="14:42 &middot; Gambling.com NO &middot; FAILED"></div>
-          <div class="cube failed"    data-tip="14:47 &middot; Casinos.com IT &middot; FAILED"></div>
-          <div class="cube finished"  data-tip="14:46 &middot; Gambling.com NO &middot; FINISHED"></div>
-          <div class="cube finished"  data-tip="14:48 &middot; Gambling.com CA &middot; FINISHED"></div>
-          <!-- Remaining empty slots for rest of day -->
-          <div class="cube empty"></div>
-          <div class="cube empty"></div>
-          <div class="cube empty"></div>
-          <div class="cube empty"></div>
-          <div class="cube empty"></div>
-          <div class="cube empty"></div>
-          <div class="cube empty"></div>
-          <div class="cube empty"></div>
+      <!-- Active Publishes Panel -->
+      <div class="tab-panel" id="panel-active">
+        <div class="card">
+          <div class="card-header">
+            <span>Active Publishes</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>Site/Group</th>
+                <th># Pages</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge live">LIVE</span></td>
+                <td><a href="#" class="link">WhichBingo.co.uk</a></td>
+                <td>1,208</td>
+              </tr>
+              <tr>
+                <td><span class="badge live">LIVE</span></td>
+                <td><a href="#" class="link">Freebets.com</a></td>
+                <td>298</td>
+              </tr>
+              <tr>
+                <td><span class="badge live">LIVE</span></td>
+                <td><a href="#" class="link">Casinos.com - Intl (GX)</a></td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td><span class="badge live">LIVE</span></td>
+                <td><a href="#" class="link">Bookies.com AdTech</a></td>
+                <td>11,040</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div class="cube-legend">
-        <div class="cube-legend-item"><span class="cube-legend-dot empty"></span>Not yet published</div>
-        <div style="margin-left:auto;font-size:12px;color:#9CA3AF;">Each cube = 1 publish &middot; Hover for details &middot; Oldest &rarr; newest</div>
+      <!-- Queued Publishes Panel -->
+      <div class="tab-panel" id="panel-queued">
+        <div class="card">
+          <div class="card-header">
+            <span>Queued Publishes</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>Site/Group</th>
+                <th># Pages</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="3" class="empty-state">No queued publishes at the moment.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
+      <!-- Persistent Fails Panel -->
+      <div class="tab-panel" id="panel-fails">
+        <div class="card">
+          <div class="card-header">
+            <span>Persistent Fails</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>Site/Group</th>
+                <th># Attempts</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge live">LIVE</span></td>
+                <td><a href="#" class="link">Freebets.com</a></td>
+                <td style="color: #DC2626; font-weight: 500;">4</td>
+              </tr>
+              <tr>
+                <td><span class="badge live">LIVE</span></td>
+                <td><a href="#" class="link">BetSyndicate.ai</a></td>
+                <td style="color: #DC2626; font-weight: 500;">2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
     <!-- Error Types & Error Messages -->
     <div class="card-grid">
-
+      <!-- Error Types -->
       <div class="card">
         <div class="card-header">Error Types</div>
-        <table class="data-table">
+        <table class="data-table error-table">
           <tbody>
-            <tr><td class="error-bar-cell"><div class="error-bar-wrap"><span class="error-pct-label">95.39%</span><div class="error-bar"><div class="error-bar-fill" style="width:95.39%;"></div></div></div></td><td>Path-Not-Found</td></tr>
-            <tr><td class="error-bar-cell"><div class="error-bar-wrap"><span class="error-pct-label">3.38%</span><div class="error-bar"><div class="error-bar-fill" style="width:3.38%;"></div></div></div></td><td>Unknown</td></tr>
-            <tr><td class="error-bar-cell"><div class="error-bar-wrap"><span class="error-pct-label">0.61%</span><div class="error-bar"><div class="error-bar-fill" style="width:0.61%;"></div></div></div></td><td>Start-Publish</td></tr>
-            <tr><td class="error-bar-cell"><div class="error-bar-wrap"><span class="error-pct-label">0.15%</span><div class="error-bar"><div class="error-bar-fill" style="width:0.15%;"></div></div></div></td><td>Timeout</td></tr>
-            <tr><td class="error-bar-cell"><div class="error-bar-wrap"><span class="error-pct-label">0.15%</span><div class="error-bar"><div class="error-bar-fill" style="width:0.15%;"></div></div></div></td><td>Template-Issue</td></tr>
-            <tr><td class="error-bar-cell"><div class="error-bar-wrap"><span class="error-pct-label">0.15%</span><div class="error-bar"><div class="error-bar-fill" style="width:0.15%;"></div></div></div></td><td>Offer-Generation-Failure</td></tr>
-            <tr><td class="error-bar-cell"><div class="error-bar-wrap"><span class="error-pct-label">0.15%</span><div class="error-bar"><div class="error-bar-fill" style="width:0.15%;"></div></div></div></td><td>Error-In-Step-PublishKiller</td></tr>
+            <tr>
+              <td>95.39%</td>
+              <td>Path-Not-Found</td>
+            </tr>
+            <tr>
+              <td>3.38%</td>
+              <td>Unknown</td>
+            </tr>
+            <tr>
+              <td>0.61%</td>
+              <td>Start-Publish</td>
+            </tr>
+            <tr>
+              <td>0.15%</td>
+              <td>Timeout</td>
+            </tr>
+            <tr>
+              <td>0.15%</td>
+              <td>Template-Issue</td>
+            </tr>
+            <tr>
+              <td>0.15%</td>
+              <td>Offer-Generation-Failure</td>
+            </tr>
+            <tr>
+              <td>0.15%</td>
+              <td>Error-In-Step-PublishKiller</td>
+            </tr>
           </tbody>
         </table>
       </div>
 
+      <!-- Error Messages -->
       <div class="card">
         <div class="card-header">Error Messages</div>
-        <table class="data-table">
+        <table class="data-table error-table">
           <tbody>
             <tr>
-              <td style="width:70px;color:#6B7280;">1.08%</td>
+              <td>1.08%</td>
               <td class="error-message">The publish failed at the Mr Curl.</td>
             </tr>
             <tr>
-              <td style="width:70px;color:#6B7280;">0.15%</td>
+              <td>0.15%</td>
               <td class="error-message">
                 <span class="error-type">ERROR-PATH-NOT-FOUND</span><br>
-                Path Not Found &middot; Genesis Object: <span class="error-link">site-brand-products</span><br>
-                Genesis ID: 4738 &middot; Page: GDC - CA - Product - Review
+                Path Not Found · Genesis Object: <span class="error-link">site-brand-products</span><br>
+                Genesis ID: 4738 · Page: GDC - CA - Product - Review
               </td>
             </tr>
             <tr>
-              <td style="width:70px;color:#6B7280;">0.15%</td>
+              <td>0.15%</td>
               <td class="error-message">
                 <span class="error-type">ERROR-PATH-NOT-FOUND</span><br>
-                Path Not Found &middot; Genesis Object: <span class="error-link">site-brand-products</span><br>
-                Genesis ID: 4738 &middot; Content ID: 2071
+                Path Not Found · Genesis Object: <span class="error-link">site-brand-products</span><br>
+                Genesis ID: 4738 · Content ID: 2071
               </td>
             </tr>
           </tbody>
         </table>
         <button class="btn-view-all">View all 100 error messages</button>
       </div>
-
     </div>
 
     <!-- Publishes from the last 30 days -->
     <div class="full-table-card">
-      <div style="padding:16px 20px 0;">
-        <h2 style="font-size:16px;font-weight:500;color:#1F2937;margin:0 0 4px;">Publishes from the last 30 days</h2>
+      <div style="padding: 20px 20px 0;">
+        <h2 style="font-size: 16px; font-weight: 500; color: #1F2937; margin: 0 0 4px;">Publishes from the last 30 days</h2>
       </div>
       <div class="table-toolbar">
         <div class="table-toolbar-left">
-          <select><option>10</option><option>25</option><option>50</option><option>100</option></select>
+          <select>
+            <option>10</option>
+            <option>25</option>
+            <option>50</option>
+            <option>100</option>
+          </select>
           <span>publishes per page</span>
         </div>
         <div>
-          <label style="font-size:13px;color:#6B7280;margin-right:8px;">Search:</label>
-          <input type="text" class="search-input" placeholder="Site, user, ID...">
+          <label style="font-size: 13px; color: #6B7280; margin-right: 8px;">Search:</label>
+          <input type="text" class="search-input" placeholder="">
         </div>
       </div>
-      <div class="full-table-scroll">
-        <table class="full-data-table">
-          <thead>
-            <tr>
-              <th style="width:80px;">ID</th>
-              <th>Site/Group</th>
-              <th style="width:104px;">Status</th>
-              <th style="width:64px;">Type</th>
-              <th>User</th>
-              <th style="width:140px;">Started</th>
-              <th style="width:80px;">Duration</th>
-              <th style="width:80px;"># Items</th>
-              <th>Comment</th>
-              <th style="width:84px;">Log</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="clickable-row">
-              <td>392071</td><td><a href="#" class="link">Gambling.com Canada (CA)</a></td><td><span class="status-badge finished">FINISHED</span></td><td>PAGE</td><td>Alice Soule</td><td>2026-03-20<br><span class="text-muted">14:48:36</span></td><td>1:43</td><td>1</td><td class="text-muted">Published from Genesis.</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-            <tr class="clickable-row">
-              <td>392070</td><td><a href="#" class="link">Gambling.com Norway (NO)</a></td><td><span class="status-badge finished">FINISHED</span></td><td>FULL</td><td>Bella Galea</td><td>2026-03-20<br><span class="text-muted">14:46:54</span></td><td>5:19</td><td>1,684</td><td class="text-muted">No comment added</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-            <tr class="clickable-row">
-              <td>392069</td><td><a href="#" class="link">Casinos.com Italy (IT)</a></td><td><span class="status-badge finished">FINISHED</span></td><td>PAGE</td><td>Antonio Gullotti</td><td>2026-03-20<br><span class="text-muted">14:47:35</span></td><td>0:57</td><td>1</td><td class="text-muted">Published from Genesis.</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-            <tr class="clickable-row">
-              <td>392068</td><td><a href="#" class="link">Casinos.com - General Intl (GX)</a></td><td><span class="status-badge finished">FINISHED</span></td><td>PAGE</td><td>Dina Petkovic</td><td>2026-03-20<br><span class="text-muted">14:44:35</span></td><td>2:24</td><td>1</td><td class="text-muted">Published from Genesis.</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-            <tr class="clickable-row row-failed">
-              <td>392067</td><td><a href="#" class="link">Gambling.com Norway (NO)</a></td><td><span class="status-badge failed">FAILED</span></td><td>FULL</td><td>Bella Galea</td><td>2026-03-20<br><span class="text-muted">14:42:36</span></td><td>3:43</td><td>1,684</td><td class="text-muted">No comment added</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-            <tr class="clickable-row">
-              <td>392066</td><td><a href="#" class="link">Gambling.com Great Britain (GB)</a></td><td><span class="status-badge finished">FINISHED</span></td><td>PAGE</td><td>Non-Origins User</td><td>2026-03-20<br><span class="text-muted">14:36:35</span></td><td>1:15</td><td>2</td><td class="text-muted">Published from Genesis.</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-            <tr class="clickable-row">
-              <td>392065</td><td><a href="#" class="link">Gambling.com Canada (CA)</a></td><td><span class="status-badge finished">FINISHED</span></td><td>PAGE</td><td>Alice Soule</td><td>2026-03-20<br><span class="text-muted">14:35:36</span></td><td>1:34</td><td>1</td><td class="text-muted">Published from Genesis.</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-            <tr class="clickable-row">
-              <td>392064</td><td><a href="#" class="link">Gambling.com Austria (AT)</a></td><td><span class="status-badge finished">FINISHED</span></td><td>PAGE</td><td>Liane Nothof</td><td>2026-03-20<br><span class="text-muted">14:34:36</span></td><td>1:06</td><td>1</td><td class="text-muted">Published from Genesis.</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-            <tr class="clickable-row">
-              <td>392063</td><td><a href="#" class="link">Gambling.com United States (US)</a></td><td><span class="status-badge finished">FINISHED</span></td><td>PAGE</td><td>Dusan Cvetanovic</td><td>2026-03-20<br><span class="text-muted">14:32:35</span></td><td>3:36</td><td>1</td><td class="text-muted">Published from Genesis.</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-            <tr class="clickable-row">
-              <td>392062</td><td><a href="#" class="link">Gambling.com Austria (AT)</a></td><td><span class="status-badge finished">FINISHED</span></td><td>PAGE</td><td>Liane Nothof</td><td>2026-03-20<br><span class="text-muted">14:31:36</span></td><td>1:11</td><td>1</td><td class="text-muted">Published from Genesis.</td>
-              <td><button class="btn-icon" title="View" style="margin-right:4px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button><button class="btn-icon" title="Download"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="full-data-table">
+        <thead>
+          <tr>
+            <th style="width: 70px;">ID</th>
+            <th>Site/Group</th>
+            <th style="width: 90px;">Status</th>
+            <th style="width: 60px;">Type</th>
+            <th>User</th>
+            <th style="width: 130px;">Started</th>
+            <th style="width: 70px;">Duration</th>
+            <th style="width: 70px;"># Items</th>
+            <th>Comment</th>
+            <th style="width: 80px;">Log</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>392071</td>
+            <td><a href="#" class="link">Gambling.com Canada (CA)</a></td>
+            <td><span class="status-badge finished">FINISHED</span></td>
+            <td>PAGE</td>
+            <td>Alice Soule</td>
+            <td>2026-03-20<br><span class="text-muted">14:48:36</span></td>
+            <td>1:43</td>
+            <td>1</td>
+            <td class="text-muted">Published from Genesis.</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+          <tr>
+            <td>392070</td>
+            <td><a href="#" class="link">Gambling.com Norway (NO)</a></td>
+            <td><span class="status-badge finished">FINISHED</span></td>
+            <td>FULL</td>
+            <td>Bella Galea</td>
+            <td>2026-03-20<br><span class="text-muted">14:46:54</span></td>
+            <td>5:19</td>
+            <td>1,684</td>
+            <td class="text-muted">No comment added</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+          <tr>
+            <td>392069</td>
+            <td><a href="#" class="link">Casinos.com Italy (IT)</a></td>
+            <td><span class="status-badge finished">FINISHED</span></td>
+            <td>PAGE</td>
+            <td>Antonio Gullotti</td>
+            <td>2026-03-20<br><span class="text-muted">14:47:35</span></td>
+            <td>0:57</td>
+            <td>1</td>
+            <td class="text-muted">Published from Genesis.</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+          <tr>
+            <td>392068</td>
+            <td><a href="#" class="link">Casinos.com - General Intl (GX)</a></td>
+            <td><span class="status-badge finished">FINISHED</span></td>
+            <td>PAGE</td>
+            <td>Dina Petkovic</td>
+            <td>2026-03-20<br><span class="text-muted">14:44:35</span></td>
+            <td>2:24</td>
+            <td>1</td>
+            <td class="text-muted">Published from Genesis.</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+          <tr>
+            <td>392067</td>
+            <td><a href="#" class="link">Gambling.com Norway (NO)</a></td>
+            <td><span class="status-badge failed">FAILED</span></td>
+            <td>FULL</td>
+            <td>Bella Galea</td>
+            <td>2026-03-20<br><span class="text-muted">14:42:36</span></td>
+            <td>3:43</td>
+            <td>1,684</td>
+            <td class="text-muted">No comment added</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+          <tr>
+            <td>392066</td>
+            <td><a href="#" class="link">Gambling.com Great Britain (GB)</a></td>
+            <td><span class="status-badge finished">FINISHED</span></td>
+            <td>PAGE</td>
+            <td>Non-Origins User</td>
+            <td>2026-03-20<br><span class="text-muted">14:36:35</span></td>
+            <td>1:15</td>
+            <td>2</td>
+            <td class="text-muted">Published from Genesis.</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+          <tr>
+            <td>392065</td>
+            <td><a href="#" class="link">Gambling.com Canada (CA)</a></td>
+            <td><span class="status-badge finished">FINISHED</span></td>
+            <td>PAGE</td>
+            <td>Alice Soule</td>
+            <td>2026-03-20<br><span class="text-muted">14:35:36</span></td>
+            <td>1:34</td>
+            <td>1</td>
+            <td class="text-muted">Published from Genesis.</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+          <tr>
+            <td>392064</td>
+            <td><a href="#" class="link">Gambling.com Austria (AT)</a></td>
+            <td><span class="status-badge finished">FINISHED</span></td>
+            <td>PAGE</td>
+            <td>Liane Nothof</td>
+            <td>2026-03-20<br><span class="text-muted">14:34:36</span></td>
+            <td>1:06</td>
+            <td>1</td>
+            <td class="text-muted">Published from Genesis.</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+          <tr>
+            <td>392063</td>
+            <td><a href="#" class="link">Gambling.com United States (US)</a></td>
+            <td><span class="status-badge finished">FINISHED</span></td>
+            <td>PAGE</td>
+            <td>Dusan Cvetanovic</td>
+            <td>2026-03-20<br><span class="text-muted">14:32:35</span></td>
+            <td>3:36</td>
+            <td>1</td>
+            <td class="text-muted">Published from Genesis.</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+          <tr>
+            <td>392062</td>
+            <td><a href="#" class="link">Gambling.com Austria (AT)</a></td>
+            <td><span class="status-badge finished">FINISHED</span></td>
+            <td>PAGE</td>
+            <td>Liane Nothof</td>
+            <td>2026-03-20<br><span class="text-muted">14:31:36</span></td>
+            <td>1:11</td>
+            <td>1</td>
+            <td class="text-muted">Published from Genesis.</td>
+            <td>
+              <button class="btn-icon" title="View"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              <button class="btn-icon" title="Download"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <div class="pagination">
         <span>Showing 1 to 10 of 8,468 entries</span>
         <div class="pagination-buttons">
-          <button class="pagination-btn" disabled>&#171;</button>
-          <button class="pagination-btn" disabled>&#8249;</button>
+          <button class="pagination-btn" disabled>«</button>
+          <button class="pagination-btn" disabled>‹</button>
           <button class="pagination-btn active">1</button>
           <button class="pagination-btn">2</button>
           <button class="pagination-btn">3</button>
@@ -818,17 +1413,37 @@
           <button class="pagination-btn">5</button>
           <button class="pagination-btn">...</button>
           <button class="pagination-btn">847</button>
-          <button class="pagination-btn">&#8250;</button>
-          <button class="pagination-btn">&#187;</button>
+          <button class="pagination-btn">›</button>
+          <button class="pagination-btn">»</button>
         </div>
       </div>
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
-      Made with &#10084;&#65039; by <a href="#">Genesis Team</a> &middot; v3.9.0<br>
-      &copy; 2026 &middot; Gambling.com Group Limited.
+      Made with ❤️ by <a href="#">Genesis Team</a> · v3.9.0<br>
+      © 2026 · Gambling.com Group Limited.
     </footer>
-
   </main>
+
+  <script>
+    function switchTab(tabName) {
+      // Remove active class from all tabs
+      document.querySelectorAll('.stat-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Hide all panels
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      
+      // Add active class to clicked tab
+      document.querySelector(`.stat-tab[data-tab="${tabName}"]`).classList.add('active');
+      
+      // Show corresponding panel
+      document.getElementById(`panel-${tabName}`).classList.add('active');
+    }
+  </script>
 </body>
 </html>
